@@ -1,0 +1,85 @@
+Standar API
+
+{root.api}/{version}/{grouping}/{endpoint}
+SAMPLE:
+http://mern-api.sento.com/v1/auth/login
+
+Standar Status Response
+ 
+ 200 - OK  = Call API Success
+ 201 - CREATED = Post Success
+ 400 - BAD REQUEST = Error on Client Side (Bisa salah input dll)
+ 401 - UNAUTHORIZED = User not authorized to the request
+ 403 - FORBIDEN = Uset not allowed to access
+ 404 - NOT FOUND = Register Endpoint not found 
+ 500 - INTERNAL SERVER ERROR = Error on Server Side
+ 502 - BAD GATEWAY = Invalid Response From Another Request
+
+GROUP : Authentication
+
+[1] Register
+{root.api}/{version}/auth/register
+
+req:
+{
+    "name": "Testing",
+    "e-mail": "testing@email.com",
+    "password": "1234566"
+}
+
+res:
+{
+    "message": "Register Success"
+    "data":{
+        "name": "Testing",
+        "e-mail": "testing@email.com",
+        "password": "1234566" 
+    }
+}
+
+err-response:
+400 = input yang anda masukan tidak valid
+
+[2] Login
+{root.api}/{version}/auth/login
+
+res:
+{
+    ""
+}
+
+GROUP : Blog (main-app)
+
+[1] Create Blog Post 
+[POST] : {root.api}/{version}/blog/post 
+
+req: 
+{
+    "title": "Title blog",
+    "image": "image.png",
+    "body": "lorem ipsum is a dummny text"
+}
+
+res: 
+{
+    "message": "Create Blog Post Success",
+    "data": {
+        "post_id": 1,
+        "title": "Title blog",
+        "image": "image.png",
+        "body": "lorem ipsum is a dummny text",
+        "created_at": "11/02/2022",
+        "author": {
+            "uuid": 1,
+            "name": "sento"
+        }
+    }
+}
+
+err response:
+201 = Blog Post berhasil dibuat
+400 = input yang anda masukan tidak valid
+
+[2] Get Blog Post 
+[3] Update Blog Post 
+[4] Delete Blog Post
