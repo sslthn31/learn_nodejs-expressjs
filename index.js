@@ -5,7 +5,7 @@ const multer = require('multer');
 const path = require('path');
 
 const app = express();
-const port = process.env.PORT || 4000
+const port = 4000
 
 const getAllRoutes = require('./src/routes/products');
 const authRoutes = require('./src/routes/auth');
@@ -43,12 +43,7 @@ app.use((req, res, next) => {
 })
 
 //note: default browser hanya menerima get & use aja. yg laen kgk bisa
-app.use('/', (req, res) => {
-    res.send('Sup dude');
-})
-app.use('/test', (req, res) => {
-    res.send('test dulu');
-})
+
 app.use('/v1', getAllRoutes); 
 
 app.use('/v1/auth', authRoutes);
