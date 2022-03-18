@@ -5,6 +5,8 @@ const multer = require('multer');
 const path = require('path');
 
 const app = express();
+const port = process.env.PORT || 4000
+
 const getAllRoutes = require('./src/routes/products');
 const authRoutes = require('./src/routes/auth');
 const blogRoutes = require('./src/routes/blog');
@@ -34,8 +36,9 @@ app.use(multer({storage: fileStorage, fileFilter: fileFilter}).single('image'));
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*'); //agar semua website bisa akses API kita
-    res.setHeader('Access-Control-Allow-Method', 'POST, GET, PUT, PATCH, DELETE, OPTIONS');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'POST, GET, PUT, PATCH, DELETE, OPTIONS');
+    res.setHeader("Access-Control-Allow-Credentials", 'true');
+    res.setHeader('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
     next();
 })
 
@@ -56,6 +59,6 @@ app.use((error, req, res, next) => {
 //db password : nFOnlCJc58ozLVRE
 mongoose.connect('mongodb://user31:nFOnlCJc58ozLVRE@cluster0-shard-00-00.rujyh.mongodb.net:27017,cluster0-shard-00-01.rujyh.mongodb.net:27017,cluster0-shard-00-02.rujyh.mongodb.net:27017/blogDb?ssl=true&replicaSet=atlas-wm4uqb-shard-0&authSource=admin&retryWrites=true&w=majority')
 .then(() => {
-    app.listen(4000, () => console.log("Connection Success"));
+    app.listen(port, () => console.log("Connection Success"));
 })
 .catch(err => console.log(err));

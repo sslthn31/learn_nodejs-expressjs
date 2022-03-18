@@ -41,15 +41,29 @@ exports.createBlogPost = (req, res, next) => {
 }
 
 exports.getAllBlogPost = (req, res, next) => {
+    const currentPage = req.query.page || 1;
+    const perPage = req.query.perPage || 5;
+    let totalItems;
+
     blogPost.find()
+    .countDocuments()
+    .then(count => {
+        totalItems = count;
+        return blogPost.find()
+        .skip((parseInt(currentPage) - 1) * parseInt(perPage))
+        .limit(parseInt(perPage));
+    })
     .then(result => {
         res.status(200).json({
             message: "Data Sukses Dipanggil",
-            data: result
+            data: result,
+            total_data: totalItems,
+            per_page: parseInt(perPage),
+            current_page: parseInt(currentPage)
         });
     })
     .catch(err => {
-        next(err);
+        next(err)
     })
 }
 
