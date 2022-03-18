@@ -46,6 +46,9 @@ app.use((req, res, next) => {
 app.use('/', (req, res) => {
     res.send('Sup dude');
 })
+app.use('/test', (req, res) => {
+    res.send('test dulu');
+})
 app.use('/v1', getAllRoutes); 
 
 app.use('/v1/auth', authRoutes);
