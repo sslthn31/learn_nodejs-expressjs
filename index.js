@@ -43,6 +43,9 @@ app.use((req, res, next) => {
 })
 
 //note: default browser hanya menerima get & use aja. yg laen kgk bisa
+app.use('/', (req, res) => {
+    res.send('Sup dude');
+})
 app.use('/v1', getAllRoutes); 
 
 app.use('/v1/auth', authRoutes);
