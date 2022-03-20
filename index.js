@@ -5,7 +5,8 @@ const multer = require('multer');
 const path = require('path');
 
 const app = express();
-const port = 4000
+const port = process.env.PORT || 4000
+const database = process.env.MONGO_URI || "mongodb://user31:nFOnlCJc58ozLVRE@cluster0-shard-00-00.rujyh.mongodb.net:27017,cluster0-shard-00-01.rujyh.mongodb.net:27017,cluster0-shard-00-02.rujyh.mongodb.net:27017/blogDb?ssl=true&replicaSet=atlas-wm4uqb-shard-0&authSource=admin&retryWrites=true&w=majority"
 
 const getAllRoutes = require('./src/routes/products');
 const authRoutes = require('./src/routes/auth');
@@ -58,7 +59,7 @@ app.use((error, req, res, next) => {
 });
 
 //db password : nFOnlCJc58ozLVRE
-mongoose.connect('mongodb://user31:nFOnlCJc58ozLVRE@cluster0-shard-00-00.rujyh.mongodb.net:27017,cluster0-shard-00-01.rujyh.mongodb.net:27017,cluster0-shard-00-02.rujyh.mongodb.net:27017/blogDb?ssl=true&replicaSet=atlas-wm4uqb-shard-0&authSource=admin&retryWrites=true&w=majority')
+mongoose.connect(database)
 .then(() => {
     app.listen(port, () => console.log("Connection Success"));
 })
