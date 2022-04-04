@@ -1,0 +1,12 @@
+GET http://localhost:4000/v1/blog/post/620a83199d9b9cbd2420c3bc
+
+###
+
+
+POST http://localhost:4000/v1/blog/post
+Content-Type: application/json
+
+{
+    "title": "Batu woy",
+    "body": "emang batu cok"
+}

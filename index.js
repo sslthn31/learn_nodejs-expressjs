@@ -8,9 +8,10 @@ const app = express();
 const port = process.env.PORT || 4000
 const database = process.env.MONGO_URI || "mongodb://user31:nFOnlCJc58ozLVRE@cluster0-shard-00-00.rujyh.mongodb.net:27017,cluster0-shard-00-01.rujyh.mongodb.net:27017,cluster0-shard-00-02.rujyh.mongodb.net:27017/blogDb?ssl=true&replicaSet=atlas-wm4uqb-shard-0&authSource=admin&retryWrites=true&w=majority"
 
-const getAllRoutes = require('./src/routes/products');
+
 const authRoutes = require('./src/routes/auth');
 const blogRoutes = require('./src/routes/blog');
+const produkRoutes = require('./src/routes/products');
 
 const fileStorage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -45,11 +46,13 @@ app.use((req, res, next) => {
 
 //note: default browser hanya menerima get & use aja. yg laen kgk bisa
 
-app.use('/v1', getAllRoutes); 
+
 
 app.use('/v1/auth', authRoutes);
 
 app.use('/v1/blog', blogRoutes);
+
+app.use('/v1/produks', produkRoutes);
 
 app.use((error, req, res, next) => {
     const statusnya = error.errorStatus || 500;
